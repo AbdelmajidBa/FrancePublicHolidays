@@ -2,9 +2,9 @@ using System;
 
 namespace FrancePublicHolidays.Exceptions
 {
-    internal class CallApiException : Exception
+    internal class AuthorizedValuesException : Exception
     {
-        public CallApiException (string message) : base(message) { }
-        public CallApiException(string message, Exception inner) : base(message, inner) { }
-    }
+        public AuthorizedValuesException(string message) : base(message) { }
+        public AuthorizedValuesException(string message, Exception inner) : base(message, inner) { }
+   }
 }
