@@ -1,4 +1,4 @@
-﻿using FrancePublicHolidays.Exceptions;
+using FrancePublicHolidays.Exceptions;
 using FrancePublicHolidays.Model;
 using Newtonsoft.Json;
 using System;
@@ -11,19 +11,15 @@ using System.Threading.Tasks;
 
 namespace FrancePublicHolidays.Service
 {
-    internal class FrancePublicHolidayAPI : IDisposable
+    internal class FrancePublicHolidayAPI : ISericeFrPublicHoliyas, IDisposable
     {
         private const string URI = "https://jours-feries-france.antoine-augusti.fr/api/";
         private static FrancePublicHolidayAPI instance = null;
 
-        private IDictionary<int, IEnumerable<Holiday>> holidays;
-
         private FrancePublicHolidayAPI()
         {
-             holidays = new Dictionary<int, IEnumerable<Holiday>>();
-             var data = GetDataByYearAsync(DateTime.Now.Year);
-            if (!data.IsFaulted)
-                holidays.Add(DateTime.Now.Year, data.Result);
+             Holidays = new Dictionary<int, IEnumerable<Holiday>>();
+             GetDataAsync();
         }
 
         public static FrancePublicHolidayAPI Instance
@@ -39,76 +35,18 @@ namespace FrancePublicHolidays.Service
             set { }
         }
 
-
-        public IEnumerable<Holiday> GetPublicHolidaysByYear(int year)
-        {
-            IEnumerable<Holiday> results = null;
-            if (holidays.ContainsKey(year))
-                results = holidays[year];
-            else
-            {
-                InitHolidaysRepository(year);
-                results = holidays[year];
-            }
-            return results;
-        }
-        public Holiday GetPublicHolidayByDate(DateTime date)
-        {
-            Holiday result = null;
-
-            if (isPublicHoliday(date))
-            {
-                var holiday = holidays[date.Year].Where(h => h.Date == date).FirstOrDefault();
-                result = holiday;
-            }
-            return result;
-        }
-
-        public Holiday GetPublicHolidayByNameAndYear(String name, int year)
-        {
-            Holiday result = null;
-
-            if (!holidays.ContainsKey(year))
-                InitHolidaysRepository(year);
-            
-            result = holidays[year].Where(h => h.Name == name).FirstOrDefault();
-
-            return result;
-        }
-
-
-        public bool isPublicHoliday(DateTime date)
-        {
-            if (!holidays.ContainsKey(date.Year))
-                InitHolidaysRepository(date.Year);
-            
-            var holiday = holidays[date.Year].Where(h => h.Date == date).FirstOrDefault();
-            if (holiday != null)
-                return true;
-            else
-                return false;
-
-        }
-
-        private void InitHolidaysRepository(int year)
-        {
-            var data = GetDataByYearAsync(year);
-            if (data.IsFaulted)
-                throw new CallApiException(data.Exception.Message, data.Exception.InnerException);
-            else
-                holidays.Add(year, data.Result);
-
-        }
-        private async void GetDataAsync()
+        private void GetDataAsync()
         {
             for (int i = 1950; i < 2051; i++)
             {
-                var data = await GetDataByYearAsync(i);
-                holidays.Add(i, data);
+                var data =  GetDataByYearAsync(i);
+                if (data.IsFaulted)
+                    throw new CallApiException(data.Exception.Message, data.Exception.InnerException);
+                Holidays.Add(i, data.Result);
             }
         }
         
-        private async Task<IEnumerable<Holiday>> GetDataByYearAsync(int year)
+        public async Task<IEnumerable<Holiday>> GetDataByYearAsync(int year)
         {
             try
             {
