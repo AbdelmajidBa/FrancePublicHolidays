@@ -9,6 +9,7 @@ It uses, a web API described in this French government website :  https://www.da
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Public Holiday France</PackageTags>
+    <PackageProjectUrl>https://github.com/AbdelmajidBa/FrancePublicHolidays</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
