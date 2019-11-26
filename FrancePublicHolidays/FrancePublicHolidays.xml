@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FrancePublicHolidays</name>
+    </assembly>
+    <members>
+        <member name="T:FrancePublicHolidays.Model.Holiday">
+            <summary>
+             Holi
+            </summary>
+        </member>
+        <member name="P:FrancePublicHolidays.Model.Holiday.Name">
+            <summary>
+            Public Holiday Nam
+            </summary>
+        </member>
+        <member name="P:FrancePublicHolidays.Model.Holiday.Date">
+            <summary>
+            Public Holiday Date
+            </summary>
+        </member>
+        <member name="M:FrancePublicHolidays.Model.Holiday.Equals(System.Object)">
+            <summary>
+            Determines whether two Holiday instances are equal.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FrancePublicHolidays.Model.Holiday.GetHashCode">
+            <summary>
+            Default hash function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FrancePublicHolidays.Model.Holiday.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FrancePublicHolidays.PublicHoliday">
+            <summary>
+            This package gives French Public Holidays between 1950 and 2050.
+            It uses, a web API described in this French government website : 
+                https://www.data.gouv.fr/fr/datasets/jours-feries-en-france/.
+            </summary>
+        </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.#ctor(System.String)">
+            <summary>
+            constructor
+            </summary>
+            <param name="_service">by befault satic api will be instanciated or _service="RESTapi" to use "https://jours-feries-france.antoine-augusti.fr/api/" API </param>
+        </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.GetPublicHolidayByDate(System.DateTime)">
+            <summary>
+            Get public holiday information from given date
+            </summary>
+            <param name="date"></param>
+            <returns>
+                Public holiday information of input date
+                null if not found
+                Thrown CallApiException if an Exception occurred when calling web API.
+            </returns>
+        </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.GetPublicHolidayByNameAndYear(System.String,System.Int32)">
+            <summary>
+            Get public holiday information from given holiday name and year
+            </summary>
+            <param name="name"></param>
+            <param name="year"></param>
+            <returns>
+                Public holiday information of input name and year
+                null if not found
+                Thrown CallApiException if an Exception occurred when calling web API.
+            </returns>
+        </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.GetPublicHolidaysByYear(System.Int32)">
+            <summary>
+            Get all public holidays from given year
+            </summary>
+            <param name="year"></param>
+            <returns>
+                List of public holidays of input year
+                null if not found 
+                Thrown CallApiException if an Exception occurred when calling web API.
+            </returns>
+        </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.isPublicHoliday(System.DateTime)">
+            <summary>
+            check if given date is a public holiday 
+            </summary>
+            <param name="date"></param>
+            <returns>
+                true if given date is a public holiday
+                flase if not
+                Thrown CallApiException if an Exception occurred when calling web API.
+            </returns>
+        </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.Dispose">
+            <summary>
+            Dipose resources 
+            </summary>
+        </member>
+    </members>
+</doc>
