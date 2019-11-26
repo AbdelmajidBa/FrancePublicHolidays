@@ -2,7 +2,7 @@
 This package gives French Public Holidays between 1950 and 2050.
 It uses, a web API described in this French government website :  https://www.data.gouv.fr/fr/datasets/jours-feries-en-france/.
 
-Nuget: Install-Package FrancePublicHolidays 
+Nuget: Install-Package FrancePublicHolidays [![Nuget](https://img.shields.io/nuget/v/FrancePublicHolidays.svg) ](https://www.nuget.org/packages/FrancePublicHolidays/)
 
 ```C#
 //create an instance of FrancePublicHolidays using default constructor (call static api file)
