@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace FrancePublicHolidays.Model
@@ -12,7 +12,5 @@ namespace FrancePublicHolidays.Model
         Holiday GetPublicHolidayByNameAndYear(String name, int year);
 
         bool isPublicHoliday(DateTime date);
-
-        
     }
 }
