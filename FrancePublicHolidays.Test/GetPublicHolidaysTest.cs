@@ -130,6 +130,46 @@ namespace FrancePublicHolidays.Test
                 Assert.AreEqual(e.Message, "The year must be between 1950 and 2050. Other values are not provided by our API");
             }
         }
+
+        [TestMethod]
+        public void GetBusinessDays_2019_From01To12()
+        {
+            var res = publicHoliday.GetBusinessDays(2019, 12);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 11);
+            Assert.AreEqual(res, 19);
+
+            res = publicHoliday.GetBusinessDays(2019, 10);
+            Assert.AreEqual(res, 23);
+
+            res = publicHoliday.GetBusinessDays(2019, 9);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 8);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 7);
+            Assert.AreEqual(res, 23);
+
+            res = publicHoliday.GetBusinessDays(2019, 6);
+            Assert.AreEqual(res, 19);
+
+            res = publicHoliday.GetBusinessDays(2019, 5);
+            Assert.AreEqual(res, 20);
+
+            res = publicHoliday.GetBusinessDays(2019, 4);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 3);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 2);
+            Assert.AreEqual(res, 20);
+
+            res = publicHoliday.GetBusinessDays(2019, 1);
+            Assert.AreEqual(res, 22);
+        }
     }
     [TestClass]
     public class UnitTestStaticFileApi
@@ -254,5 +294,47 @@ namespace FrancePublicHolidays.Test
                 Assert.AreEqual(e.Message, "The year must be between 1950 and 2050. Other values are not provided by our API");
             }
         }
+
+        [TestMethod]
+        public void GetBusinessDays_2019_From01To12()
+        {
+            var res = publicHoliday.GetBusinessDays(2019, 12);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 11);
+            Assert.AreEqual(res, 19);
+
+            res = publicHoliday.GetBusinessDays(2019, 10);
+            Assert.AreEqual(res, 23);
+
+            res = publicHoliday.GetBusinessDays(2019, 9);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 8);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 7);
+            Assert.AreEqual(res, 23);
+
+            res = publicHoliday.GetBusinessDays(2019, 6);
+            Assert.AreEqual(res, 19);
+
+            res = publicHoliday.GetBusinessDays(2019, 5);
+            Assert.AreEqual(res, 20);
+
+            res = publicHoliday.GetBusinessDays(2019, 4);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 3);
+            Assert.AreEqual(res, 21);
+
+            res = publicHoliday.GetBusinessDays(2019, 2);
+            Assert.AreEqual(res, 20);
+
+            res = publicHoliday.GetBusinessDays(2019, 1);
+            Assert.AreEqual(res, 22);
+        }
+
+       
     }
 }
