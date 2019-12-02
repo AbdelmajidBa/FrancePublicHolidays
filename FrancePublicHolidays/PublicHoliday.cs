@@ -15,9 +15,6 @@ namespace FrancePublicHolidays
     public class PublicHoliday : IPublicHoliday, IDisposable
     {
 
-        //private FrancePublicHolidayAPI service;
-        //private StaticFileAPI service;
-
         private ISericeFrPublicHoliyas service;
 
         /// <summary>
@@ -57,7 +54,6 @@ namespace FrancePublicHolidays
         public Holiday GetPublicHolidayByDate(DateTime date)
         {
             CheckValues(date.Year);
-            //return service.GetPublicHolidayByDate(date);
             Holiday result = null;
 
             if (isPublicHoliday(date))
@@ -80,11 +76,8 @@ namespace FrancePublicHolidays
         public Holiday GetPublicHolidayByNameAndYear(string name, int year)
         {
             CheckValues(year);
-            //return service.GetPublicHolidayByNameAndYear(name, year);
             Holiday result = null;
-
-            //if (service.Holidays.ContainsKey(year))
-                result = service.GetHolidaysByYear(year).Where(h => h.Name == name).FirstOrDefault();
+            result = service.GetHolidaysByYear(year).Where(h => h.Name == name).FirstOrDefault();
 
             return result;
         }
@@ -101,10 +94,8 @@ namespace FrancePublicHolidays
         public IEnumerable<Holiday> GetPublicHolidaysByYear(int year)
         {
             CheckValues(year);
-            //return service.GetPublicHolidaysByYear(year);
             IEnumerable<Holiday> results = null;
-            //if (service.Holidays.ContainsKey(year))
-                results = service.GetHolidaysByYear(year);
+            results = service.GetHolidaysByYear(year);
 
             return results;
         }
@@ -120,12 +111,37 @@ namespace FrancePublicHolidays
         public bool isPublicHoliday(DateTime date)
         {
             CheckValues(date.Year);
-            //return service.isPublicHoliday(date);
             var holiday = service.GetHolidaysByYear(date.Year).Where(h => h.Date == date).FirstOrDefault();
             if (holiday != null)
                 return true;
             else
                 return false;
+        }
+
+        /// <summary>
+        /// Get total business days holidays from given year and month
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+
+
+        public int GetBusinessDays(int year, int month)
+        {
+            CheckValues(year);
+            IEnumerable<Holiday> results = null;
+            results = service.GetHolidaysByYear(year).Where(h=>h.Date.Month==month);
+            var hDates = results.Select(h=> new { Date = h.Date });
+            
+            
+            var daysInMonth = DateTime.DaysInMonth(year, month);
+
+            var dates = Enumerable.Range(1, daysInMonth)
+                                        .Select(n => new DateTime(year, month, n))
+                                        .Where(date => IsWorkingDay(date) && !hDates.Contains(new { Date = date.Date }))
+                                        .ToArray();
+
+            return dates.Count();
         }
         /// <summary>
         /// Dipose resources 
@@ -139,7 +155,13 @@ namespace FrancePublicHolidays
                     FrancePublicHolidayAPI.Instance.Dispose();
             }
             service = null;
-
         }
+
+        private bool IsWorkingDay(DateTime date)
+        {
+            return date.DayOfWeek != DayOfWeek.Saturday
+                && date.DayOfWeek != DayOfWeek.Sunday;
+        }
+
     }
 }
