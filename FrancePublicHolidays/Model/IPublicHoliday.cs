@@ -12,5 +12,7 @@ namespace FrancePublicHolidays.Model
         Holiday GetPublicHolidayByNameAndYear(String name, int year);
 
         bool isPublicHoliday(DateTime date);
+        
+        int GetBusinessDays(int year, int month);
     }
 }
