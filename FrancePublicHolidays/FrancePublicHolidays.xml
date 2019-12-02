@@ -96,6 +96,14 @@
                 Thrown CallApiException if an Exception occurred when calling web API.
             </returns>
         </member>
+        <member name="M:FrancePublicHolidays.PublicHoliday.GetBusinessDays(System.Int32,System.Int32)">
+            <summary>
+            Get total business days holidays from given year and month
+            </summary>
+            <param name="year"></param>
+            <param name="month"></param>
+            <returns></returns>
+        </member>
         <member name="M:FrancePublicHolidays.PublicHoliday.Dispose">
             <summary>
             Dipose resources 
