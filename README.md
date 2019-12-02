@@ -19,6 +19,9 @@ using (var publicHoliday = new PublicHoliday())
 
     //Get public holiday informations from given holiday name and year
     holiday = publicHoliday.GetPublicHolidayByNameAndYear("Assomption", 2015);
+    
+    //Get total business days holidays from given year and month
+    int total = publicHoliday.GetBusinessDays(2019, 12);
 }
 //create an instance of FrancePublicHolidays using Rest api ("https://jours-feries-france.antoine-augusti.fr/api/")
 using (var publicHoliday = new PublicHoliday("RESTapi"))
